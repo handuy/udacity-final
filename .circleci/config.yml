@@ -34,7 +34,7 @@ jobs:
     # docker:
     #   - image: docker:18.05.0-ce-git
     machine:
-      - image: ubuntu-2004:2022.07.1
+      image: ubuntu-2004:2022.07.1
     steps:
       - checkout
 
