@@ -31,8 +31,10 @@ jobs:
             make lint
 
   build-docker-image:
-    docker:
-      - image: docker:19.05.0-ce-git
+    # docker:
+    #   - image: docker:18.05.0-ce-git
+    machine:
+      - image: ubuntu-2004:2022.07.1
     steps:
       - checkout
 
