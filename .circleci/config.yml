@@ -87,4 +87,4 @@ workflows:
       - deploy-app:
           filters:
             branches:
-              only: [deploy]
+              only: [master]
