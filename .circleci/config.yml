@@ -54,6 +54,7 @@ jobs:
       - checkout
       - run:
           name: Deploy K8S cluster
+          no_output_timeout: 30m
           command: |
             ANSIBLE_TIMEOUT=30; ansible-playbook ansible/main.yml
 
