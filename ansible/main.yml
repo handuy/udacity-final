@@ -1,0 +1,8 @@
+---
+- name: Deploy K8S cluster
+  hosts: localhost
+  connection: local 
+
+  tasks:
+  - name: Deploy K8S
+    command: eksctl create cluster --name udacity

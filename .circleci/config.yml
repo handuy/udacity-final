@@ -37,34 +37,39 @@ jobs:
       image: ubuntu-2004:2022.07.1
     steps:
       - checkout
-
-      # - setup_remote_docker
-
       - run:
           name: Build application Docker image
           command: |
             docker build -t handuy1992/final-proj .
-
       - run:
           name: Push application Docker image
           command: |
             echo "$DOCKERHUB_PASS" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
             docker push handuy1992/final-proj
 
+  deploy-k8s:
+    docker:
+      - image: handuy1992/eks
+    steps:
+      - checkout
+      - run:
+          name: Deploy K8S cluster
+          command: |
+            ansible-playbook ansible/main.yml
+
 workflows:
   default:
     jobs:
-      - run-lint-test
+      - run-lint-test:
+          filters:
+            branches:
+              only: [master]
       - build-docker-image:
           requires: [run-lint-test]
-      # - test-backend:
-      #     requires: [build-backend]
-      # - scan-backend:
-      #     requires: [build-backend]
-      # - scan-frontend:
-      #     requires: [build-frontend]
-      # - deploy-infrastructure:
-      #     requires: [test-frontend, test-backend, scan-frontend, scan-backend]
-      #     filters:
-      #       branches:
-      #         only: [master]
+          filters:
+            branches:
+              only: [master]
+      - deploy-k8s:
+          filters:
+            branches:
+              only: [deploy]
