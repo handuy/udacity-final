@@ -5,4 +5,4 @@
 
   tasks:
   - name: Deploy K8S
-    command: eksctl create cluster --name udacity
+    command: eksctl create cluster --name udacity --region ap-southeast-1
