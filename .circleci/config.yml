@@ -54,14 +54,14 @@ jobs:
 
   deploy-app:
     docker:
-      - image: handuy1992/eks:v2
+      - image: handuy1992/eks:v3
     steps:
       - checkout
       - run:
           name: Deploy app on K8S cluster
           command: |
             aws eks update-kubeconfig --region ap-southeast-1 --name udacity
-            
+
             whoami
             ls -la
             which kubectl
