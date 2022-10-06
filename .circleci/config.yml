@@ -80,6 +80,7 @@ workflows:
             branches:
               only: [deploy]
       - deploy-app:
+          requires: [build-docker-image]
           filters:
             branches:
               only: [master]
