@@ -49,13 +49,24 @@ jobs:
 
   deploy-k8s:
     docker:
-      - image: handuy1992/eks
+      - image: handuy1992/eks:v2
     steps:
       - checkout
       - run:
           name: Deploy K8S cluster
           command: |
             ansible-playbook ansible/main.yml
+
+  deploy-app:
+    docker:
+      - image: handuy1992/eks:v2
+    steps:
+      - checkout
+      - run:
+          name: Deploy app on K8S cluster
+          command: |
+            aws eks update-kubeconfig --region ap-southeast-1 --name udacity
+            kubectl run --image=nginx app
 
 workflows:
   default:
@@ -70,6 +81,10 @@ workflows:
             branches:
               only: [master]
       - deploy-k8s:
+          filters:
+            branches:
+              only: [deploy]
+      - deploy-app:
           filters:
             branches:
               only: [deploy]
