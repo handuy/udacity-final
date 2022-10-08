@@ -84,17 +84,17 @@ workflows:
           filters:
             branches:
               only: [master]
-      - build-docker-image:
-          requires: [run-lint-test]
-          filters:
-            branches:
-              only: [master]
+      # - build-docker-image:
+      #     requires: [run-lint-test]
+      #     filters:
+      #       branches:
+      #         only: [master]
       - deploy-k8s:
           filters:
             branches:
               only: [deploy]
       - deploy-app:
-          requires: [build-docker-image]
+          # requires: [build-docker-image]
           filters:
             branches:
               only: [master]
