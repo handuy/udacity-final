@@ -60,18 +60,15 @@ jobs:
       - run:
           name: Deploy app on K8S cluster
           command: |
-            aws eks update-kubeconfig --region ap-southeast-1 --name udacity
-
-            whoami
-            ls -la
+            # aws eks update-kubeconfig --region ap-southeast-1 --name udacity
             # which kubectl >> test.txt
 
-            ls -la ~
+            curl -o kubectl.sha256 https://s3.us-west-2.amazonaws.com/amazon-eks/1.22.6/2022-03-09/bin/linux/amd64/kubectl.sha256
+            chmod +x ./kubectl
+            mkdir -p $HOME/bin && cp ./kubectl $HOME/bin/kubectl && export PATH=$PATH:$HOME/bin
+            echo 'export PATH=$PATH:$HOME/bin' >> ~/.bashrc
 
-            # curl -o kubectl.sha256 https://s3.us-west-2.amazonaws.com/amazon-eks/1.22.6/2022-03-09/bin/linux/amd64/kubectl.sha256
-            # chmod +x ./kubectl
-            # mkdir -p $HOME/bin && cp ./kubectl $HOME/bin/kubectl && export PATH=$PATH:$HOME/bin
-            # echo 'export PATH=$PATH:$HOME/bin' >> ~/.bashrc
+            aws eks update-kubeconfig --region ap-southeast-1 --name udacity
 
             kubectl version
 
