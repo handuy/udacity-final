@@ -64,7 +64,7 @@ jobs:
 
             whoami
             ls -la
-            which kubectl >> test.txt
+            # which kubectl >> test.txt
 
             ls -la ~
 
