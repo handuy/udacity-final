@@ -34,12 +34,12 @@ jobs:
       - run:
           name: Build application Docker image
           command: |
-            docker build -t handuy1992/final-proj:v1 .
+            docker build -t handuy1992/final-proj:v2 .
       - run:
           name: Push application Docker image
           command: |
             echo "$DOCKERHUB_PASS" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
-            docker push handuy1992/final-proj:v1
+            docker push handuy1992/final-proj:v2
 
   deploy-k8s:
     docker:

@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
       - name: udacity
-        image: handuy1992/final-proj:v1
+        image: handuy1992/final-proj:v2
         ports:
         - containerPort: 8000
