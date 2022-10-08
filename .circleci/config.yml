@@ -39,7 +39,7 @@ jobs:
           name: Push application Docker image
           command: |
             echo "$DOCKERHUB_PASS" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
-            docker push handuy1992/final-proj
+            docker push handuy1992/final-proj:v1
 
   deploy-k8s:
     docker:
